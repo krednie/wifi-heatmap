@@ -1,50 +1,121 @@
-# 📡 Linux Wi-Fi Strength Analyzer (Python + Qt)
+# Wi-Fi Strength Analyzer (Python + Qt / PySide6)
 
-A desktop app that visualizes **Wi-Fi signal strength over time** using:
+A Linux desktop application that visualizes Wi-Fi signal strength over time using:
 
-- **Sparkline graph (RSSI dBm VS time)**
-- **Heatmap (Time × Wi-Fi Channel)**
-- Asynchronous `nmcli` scanning (UI never freezes)
+- Sparkline graph (RSSI dBm vs Time)
+- Heatmap (Time × Wi-Fi Channel)
+- Asynchronous Wi-Fi scanning (UI does not freeze)
 
-Built using **Python + PySide6 (Qt)**.  
-Works on Linux (NetworkManager required).
-
----
-
-## 🚀 Features
-
-| Feature | Description |
-|--------|-------------|
-|  Live Wi-Fi scan (every N seconds) | Uses `nmcli` without blocking the UI |
-|  Sparkline graph | Shows RSSI (signal strength in dBm) over time |
-|  Heatmap visualization | Shows how signal strength varies per channel |
-|  Auto-select strongest AP | Shows useful data immediately |
-|  Fully asynchronous | Uses `QProcess`, so scanning never freezes UI |
-|  Pure Python | No C/C++ compilation needed |
+Built using Python and PySide6 (Qt for Python). Uses `nmcli` from NetworkManager to get Wi-Fi scan data.
 
 ---
 
-## What do the graphs show?
+## Features
 
-### Sparkline (RSSI dBm vs Time)
-- **Higher line = better signal**
-- dBm is always negative  
-  `-40 dBm = excellent`  
-  `-90 dBm = bad`
-
-### Heatmap (Time × Channel)
-- Rows = Wi-Fi channels (1–11, 36+, etc.)
-- Columns = Time (each scan)
-- Color intensity:
-  - 🟢 strong
-  - 🟡 medium
-  - 🔴 weak
-
-This helps diagnose:
-- Where Wi-Fi is weak
-- Channel congestion
-- Signal drops while moving around
+- Live Wi-Fi scanning (automatic refresh)
+- Sparkline graph showing how signal strength changes over time
+- Heatmap that shows signal strength per Wi-Fi channel over time
+- Uses QProcess for asynchronous system calls (UI remains responsive)
+- Auto-selects the strongest Wi-Fi network on launch
+- Pure Python project (no compilation required)
 
 ---
-``` basht clone https://github.com/<your-username>/wifi-heatmap.git
+
+## Prerequisites
+
+Operating system:
+- Linux (Ubuntu / Fedora / Arch / Manjaro / Pop!_OS etc.)
+- NetworkManager must be installed and running
+
+System dependencies:
+- python3 (version 3.8 or newer)
+- pip
+- python3-venv
+- NetworkManager
+- nmcli (comes with NetworkManager)
+
+Verify that nmcli works:
+nmcli dev wifi
+
+yaml
+Copy code
+
+---
+
+## Installation
+
+Clone the repository:
+git clone https://github.com/<your-username>/wifi-heatmap.git
 cd wifi-heatmap
+
+cpp
+Copy code
+
+Create and activate virtual environment:
+python3 -m venv venv
+source venv/bin/activate
+
+yaml
+Copy code
+
+Install dependencies:
+pip install -r requirements.txt
+
+yaml
+Copy code
+or manually:
+pip install PySide6
+
+yaml
+Copy code
+
+---
+
+## Run the application
+
+python app.py
+
+yaml
+Copy code
+
+---
+
+## Project Structure
+
+wifi-heatmap/
+├── app.py # main application source code
+├── requirements.txt # dependency list for pip
+└── README.md # documentation
+
+yaml
+Copy code
+
+---
+
+## How it works
+
+1. A QTimer triggers Wi-Fi scanning every N seconds.
+2. A QProcess runs the command:
+nmcli -t -f SSID,BSSID,CHAN,SIGNAL dev wifi list
+
+markdown
+Copy code
+3. The program parses output into:
+- SSID
+- BSSID (unique identifier of each access point)
+- Channel
+- Signal percentage
+
+4. Signal percentage is converted into RSSI (dBm) for accuracy.
+5. Data is stored in bounded history buffers using `deque`.
+6. Two custom PySide6 widgets use QPainter to draw:
+- Sparkline (signal vs time)
+- Heatmap (signal vs channel vs time)
+
+Because nmcli runs asynchronously using QProcess, the UI always remains responsive.
+
+---
+
+## License
+
+MIT License
