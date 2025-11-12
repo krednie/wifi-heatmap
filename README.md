@@ -1,6 +1,6 @@
 # Wi-Fi Strength Analyzer (Python + Qt / PySide6)
 
-A Linux desktop application that visualizes Wi-Fi signal strength over time using:
+A Linux desktop application that visualizes Wi-Fi signal strength and the best place in your room to get max speed in real time using:
 
 - Sparkline graph (RSSI dBm vs Time)
 - Heatmap (Time × Wi-Fi Channel)
@@ -15,9 +15,9 @@ Built using Python and PySide6 (Qt for Python). Uses `nmcli` from NetworkManager
 - Live Wi-Fi scanning (automatic refresh)
 - Sparkline graph showing how signal strength changes over time
 - Heatmap that shows signal strength per Wi-Fi channel over time
-- Uses QProcess for asynchronous system calls (UI remains responsive)
+- Uses QProcess for asynchronous system calls
 - Auto-selects the strongest Wi-Fi network on launch
-- Pure Python project (no compilation required)
+  
 
 ---
 
@@ -37,46 +37,36 @@ System dependencies:
 Verify that nmcli works:
 nmcli dev wifi
 
-yaml
-Copy code
+
 
 ---
 
 ## Installation
 
 Clone the repository:
-git clone https://github.com/<your-username>/wifi-heatmap.git
+git clone https://github.com/krednie/wifi-heatmap.git
 cd wifi-heatmap
 
-cpp
-Copy code
+
+
 
 Create and activate virtual environment:
 python3 -m venv venv
 source venv/bin/activate
 
-yaml
-Copy code
 
 Install dependencies:
 pip install -r requirements.txt
 
-yaml
-Copy code
 or manually:
 pip install PySide6
 
-yaml
-Copy code
 
 ---
 
 ## Run the application
 
 python app.py
-
-yaml
-Copy code
 
 ---
 
@@ -87,8 +77,7 @@ wifi-heatmap/
 ├── requirements.txt # dependency list for pip
 └── README.md # documentation
 
-yaml
-Copy code
+
 
 ---
 
@@ -98,8 +87,7 @@ Copy code
 2. A QProcess runs the command:
 nmcli -t -f SSID,BSSID,CHAN,SIGNAL dev wifi list
 
-markdown
-Copy code
+
 3. The program parses output into:
 - SSID
 - BSSID (unique identifier of each access point)
