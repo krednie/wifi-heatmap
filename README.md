@@ -8,6 +8,7 @@ A Linux desktop application that visualizes Wi-Fi signal strength and the best p
 
 Built using Python and PySide6 (Qt for Python). Uses `nmcli` from NetworkManager to get Wi-Fi scan data.
 <img width="1848" height="1512" alt="Screenshot from 2025-11-12 17-37-38" src="https://github.com/user-attachments/assets/ed26ebe4-9cfc-414e-acd9-9779f578f52d" />
+<img width="500" height="350" alt="Screenshot from 2025-11-12 15-51-56" src="https://github.com/user-attachments/assets/0139fa79-4e7b-435c-86ec-4710b4554db8" /> <img width="500" height="350" alt="Screenshot from 2025-11-12 16-35-59" src="https://github.com/user-attachments/assets/9f5e82da-1e77-4120-9023-e45637c59b88" />
 
 
 ---
