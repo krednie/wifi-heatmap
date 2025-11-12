@@ -7,6 +7,7 @@ A Linux desktop application that visualizes Wi-Fi signal strength and the best p
 - Asynchronous Wi-Fi scanning (UI does not freeze)
 
 Built using Python and PySide6 (Qt for Python). Uses `nmcli` from NetworkManager to get Wi-Fi scan data.
+<img width="1785" height="1403" alt="Screenshot from 2025-11-12 16-35-59" src="https://github.com/user-attachments/assets/8e1e2483-4820-495c-9cc8-efaa4e8c2a0b" />
 
 ---
 
